@@ -1,13 +1,14 @@
 import path from 'path';
+import { Request, Response } from 'express';
 import express from 'express';
 import dotenv from 'dotenv';
-dotenv.config();
-import connectDB from './config/db.js';
+import connectDB from '../config/db';
 import cookieParser from 'cookie-parser';
-import { notFound, errorHandler } from './middleware/errorMiddleware.js';
-import userRoutes from './routes/userRoutes.js';
+import { notFound, errorHandler } from '../middleware/errorMiddleware';
+import userRoutes from '../routes/userRoutes';
 
-const port = process.env.PORT || 5000;
+dotenv.config();
+const PORT = process.env.PORT || 5000;
 
 connectDB();
 
@@ -28,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
   );
 } else {
-  app.get('/', (req, res) => {
+  app.get('/', (req: Request, res: Response) => {
     res.send('API is running....');
   });
 }
@@ -36,4 +37,4 @@ if (process.env.NODE_ENV === 'production') {
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
