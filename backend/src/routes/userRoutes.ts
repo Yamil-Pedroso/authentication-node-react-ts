@@ -5,6 +5,7 @@ import { protect } from '../middleware/authMiddleware';
 const router = express.Router();
 
 import {
+  getUsers,
   authUser,
   registerUser,
   logoutUser,
@@ -12,7 +13,7 @@ import {
   updateUserProfile,
 } from '../controllers/userController';
 
-router.route('/').post(registerUser);
+router.route('/').get(getUsers).post(registerUser);
 router.route('/auth').post(authUser);
 router.route('/logout').post(logoutUser);
 router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile);

@@ -3,6 +3,12 @@ import asyncHandler from 'express-async-handler';
 import User from '../models/userModel'
 import generateToken from '../utils/generateToken';
 
+const getUsers = asyncHandler(async (req: Request, res: Response) => {
+  const users = await User.find({});
+  res.json(users);
+}
+);
+
 // @desc    Auth user & get token
 // @route   POST /api/users/auth
 // @access  Public
@@ -12,7 +18,8 @@ const authUser = asyncHandler(async (req: Request, res: Response) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
-    generateToken(res, user._id);
+    // Explicitly cast user._id to string
+    generateToken(res, user._id.toString());
 
     res.json({
       _id: user._id,
@@ -45,7 +52,7 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
   });
 
   if (user) {
-    generateToken(res, user._id);
+    generateToken(res, user._id.toString());
 
     res.status(201).json({
       _id: user._id,
@@ -72,7 +79,7 @@ const logoutUser = (req: Request, res: Response) => {
 // @desc    Get user profile
 // @route   GET /api/users/profile
 // @access  Private
-const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
+const getUserProfile = asyncHandler(async (req: any, res: Response) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -90,7 +97,7 @@ const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
 // @desc    Update user profile
 // @route   PUT /api/users/profile
 // @access  Private
-const updateUserProfile = asyncHandler(async (req, res) => {
+const updateUserProfile = asyncHandler(async (req: any, res: Response) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -115,6 +122,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 });
 
 export {
+  getUsers,
   authUser,
   registerUser,
   logoutUser,
