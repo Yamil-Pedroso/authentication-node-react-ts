@@ -11,20 +11,20 @@ import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import store from './store'
 import { Provider } from 'react-redux'
-import HomeScreen from './screens/HomeScreen.tsx'
-import LoginScreen from './screens/LoginScreen.jsx'
-import RegisterScreen from './screens/RegisterScreen.jsx'
-import ProfileScreen from './screens/ProfileScreen.jsx'
-import PrivateRoute from './components/PrivateRoute.jsx'
+import HomePage from './pages/HomePage.tsx'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import ProfilePage from './pages/ProfilePage'
+import PrivateRoute from './components/private-route/PrivateRoute'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index={true} path="/" element={<HomeScreen />} />
-      <Route path="/login" element={<LoginScreen />} />
-      <Route path="/register" element={<RegisterScreen />} />
+      <Route index={true} path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
       <Route path="" element={<PrivateRoute />}>
-        <Route path="/profile" element={<ProfileScreen />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Route>
     </Route>,
   ),

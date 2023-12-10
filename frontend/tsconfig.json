@@ -23,6 +23,6 @@
     "noImplicitThis": true,
     "strictNullChecks": true
   },
-  "include": ["./src"],
+  "include": ["src/*", "images.d.ts"],
   "exclude": ["node_modules", "build"]
 }
