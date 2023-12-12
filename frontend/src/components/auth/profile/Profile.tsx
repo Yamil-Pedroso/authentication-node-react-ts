@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 // import { Link, useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import FormContainer from '../../form-container/FormContainer'
 import { toast } from 'react-toastify'
 import Loader from '../../../components/loader/Loader'
 import { useUpdateUserMutation } from '../../../slices/usersApiSlice'
 import { setCredentials } from '../../../slices/authSlice'
-import { Button, Input, Container, BoxWrapper, Box } from './styles';
+import { Button, Input, Container } from './styles';
+import images from '../../../assets'
 
 const Profile = () => {
   const [email, setEmail] = useState('')
@@ -48,10 +48,9 @@ const Profile = () => {
   }
   return (
     <Container>
-      <FormContainer>
+        <img src={images.bg} alt="logo" className="logo" width={480}/>
         <h1>Update Profile</h1>
-  
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} style={{ padding: "0 2rem" }}>
           <Form.Group className="my-2" controlId="name">
             <Form.Label>Name</Form.Label>
             <Input
@@ -96,8 +95,6 @@ const Profile = () => {
   
           {isLoading && <Loader />}
         </Form>
-      </FormContainer>
-     
     </Container>
   )
 }

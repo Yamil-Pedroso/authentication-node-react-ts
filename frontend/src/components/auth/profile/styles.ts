@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+    height: 60rem;
     display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 20px;
 `;
 
 export const Button = styled.button`

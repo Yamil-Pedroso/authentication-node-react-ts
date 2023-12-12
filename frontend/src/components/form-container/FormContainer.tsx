@@ -8,7 +8,7 @@ interface FormContainerProps {
 
 const FormContainer = ({ children }: FormContainerProps) => {
   return (
-      <Container className="" style={{ paddingLeft: "0" }}>
+      <Container>
         <Row className="justify-content-md-center mt-5">
           <Col
            xs={12} md={6} className="card p-5">
